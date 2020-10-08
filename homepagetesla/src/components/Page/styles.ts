@@ -1,11 +1,17 @@
 import styled from 'styled-components';
-
+import car from '../../img/4025.jpg'
+import car2 from '../../img/5078.jpg'
 export const Container = styled.div`
 .colored:nth-child(1) {
-background: #f1ffe7;
+  
+background-image: url(${car});
+background-position: center;
+background-size: cover;
 }
 .colored:nth-child(2) {
-background: #dfffd9;
+  background-image: url(${car2});
+background-position: center;
+background-size: cover;
 }
 .colored:nth-child(3) {
 background: #cdfeca;

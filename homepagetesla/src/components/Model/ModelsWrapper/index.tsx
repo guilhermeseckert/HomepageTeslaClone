@@ -1,6 +1,8 @@
 import React, { useCallback, useRef, useState } from 'react';
 import ModelsContext, {CarModel} from '../ModelsContext';
-import { Container } from './styles';
+import { Container, OverlaysRoot} from './styles';
+
+import ModelOverlay from '../ModelOverlay';
 
 const ModelsWrapper: React.FC = ({ children}) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -12,8 +14,7 @@ const ModelsWrapper: React.FC = ({ children}) => {
     setRegisteredModels(state => state.filter(model => model.modelName !== modelName))
   }, [])
 
-
-  ///pode ter erro aqui 32min
+// take a look
   const getModelByName = useCallback(
     (modelName: string) => {
     return registeredModels.find(item => item.modelName === modelName || null)
@@ -30,6 +31,11 @@ const ModelsWrapper: React.FC = ({ children}) => {
      getModelByName
    }}>
       <Container ref={wrapperRef}>
+        <OverlaysRoot>
+      {registeredModels.map(item => (
+        <ModelOverlay key={item.modelName}>{item.overlayNode}</ModelOverlay>
+      ))}
+        </OverlaysRoot>
       {children}
     </Container>
    </ModelsContext.Provider>
