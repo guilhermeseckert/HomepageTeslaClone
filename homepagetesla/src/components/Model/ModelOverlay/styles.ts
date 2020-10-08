@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-
-export const Container = styled.div`
+import {motion } from 'framer-motion';
+export const Container = styled(motion.div)`
 position: sticky;
 top: 0;
 height: 100vh;
