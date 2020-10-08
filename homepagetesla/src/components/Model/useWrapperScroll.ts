@@ -20,17 +20,17 @@ export default function useWrapperScroll() {
           const fullScroll = scrollHeight - offsetHeight;
 
           scrollY.set(scrollTop); //px
-          scrollProgress.set(scrollTop/fullScroll); /// 0 -1.
+          scrollProgress.set(scrollTop / fullScroll); /// 0 -1.
 
 
       }
 
       element.addEventListener('scroll', updateScrollValue);
 
-      return () => element.removeEventListener('scroll', updateScrollValue);
+      return () => element?.removeEventListener('scroll', updateScrollValue);
     }
 
-  }, [scrollProgress, scrollY, wrapperRef])
+  }, [wrapperRef, scrollProgress, scrollY])
 
 
   return {scrollY, scrollProgress}

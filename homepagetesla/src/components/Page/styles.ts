@@ -28,3 +28,8 @@ background: #90f29c;
 background: #77e68c;
 }
 `;
+
+export const Spacer = styled.div`
+  height: 15vh;
+  background: #77e68c;
+`
