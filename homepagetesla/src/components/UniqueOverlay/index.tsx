@@ -5,9 +5,9 @@ import useWrapperScroll from '../Model/useWrapperScroll';
 import { Container, Header, Logo, Burger, Footer } from './styles';
 
 const UniqueOverlay: React.FC = () => {
-const {scrollProgress} = useWrapperScroll();
+const {scrollYProgress} = useWrapperScroll();
 
-const opacity = useTransform(scrollProgress, [0.9, 1], [0, 1])
+const opacity = useTransform(scrollYProgress, [0.9, 1], [0, 1])
 
   return (
     <Container>

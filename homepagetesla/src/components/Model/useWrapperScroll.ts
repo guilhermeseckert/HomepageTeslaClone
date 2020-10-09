@@ -1,38 +1,33 @@
-import {useMotionValue} from "framer-motion";
-import { useContext, useEffect } from "react";
-import ModelsContext from "./ModelsContext";
+import { useContext, useEffect } from 'react'
+import { useMotionValue } from 'framer-motion'
+
+import ModelsContext from './ModelsContext'
 
 export default function useWrapperScroll() {
+  const { wrapperRef } = useContext(ModelsContext)
 
-  const {wrapperRef} = useContext(ModelsContext);
-  const scrollY= useMotionValue(0);
-  const scrollProgress = useMotionValue(0);
+  const scrollY = useMotionValue(0)
+  const scrollYProgress = useMotionValue(0)
 
+  useEffect(() => {
+    if (wrapperRef.current) {
+      const updateScrollValue = () => {
+        if (wrapperRef.current) {
+          const { scrollTop, scrollHeight, offsetHeight } = wrapperRef.current
 
-  useEffect(( )=> {
+          const fullScroll = scrollHeight - offsetHeight
 
-    const element = wrapperRef.current
-
-    if (element) {
-      const updateScrollValue= () => {
-          const {scrollTop, scrollHeight, offsetHeight} = element;
-
-          const fullScroll = scrollHeight - offsetHeight;
-
-          scrollY.set(scrollTop); //px
-          scrollProgress.set(scrollTop / fullScroll); /// 0 -1.
-
-
+          scrollY.set(scrollTop)
+          scrollYProgress.set(scrollTop / fullScroll)
+        }
       }
 
-      element.addEventListener('scroll', updateScrollValue);
+      wrapperRef.current.addEventListener('scroll', updateScrollValue)
 
-      return () => element?.removeEventListener('scroll', updateScrollValue);
+      return () =>
+        wrapperRef?.current?.removeEventListener('scroll', updateScrollValue)
     }
+  }, [wrapperRef, scrollY, scrollYProgress])
 
-  }, [wrapperRef, scrollProgress, scrollY])
-
-
-  return {scrollY, scrollProgress}
-
+  return { scrollY, scrollYProgress }
 }
